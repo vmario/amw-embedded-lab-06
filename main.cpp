@@ -1,53 +1,33 @@
 #include "shifter.hpp"
 #include "display.hpp"
 #include "timer.hpp"
-#include "counter.hpp"
 
-#include <avr/io.h>
 #include <avr/interrupt.h>
 
-#define PIN_SWITCH PINC ///< Rejestr wejściowy przycisków.
-
 /**
- * Numery pinów przycisków.
- */
-enum BIT_SWITCH {
-	BIT_SWITCH_S1 = 1, ///< Przycisk S1.
-	BIT_SWITCH_S2 = 2, ///< Przycisk S2.
-	BIT_SWITCH_S3 = 3, ///< Przycisk S3.
-};
-
-/**
- * Licznik sterowany przyciskami.
+ * Odczytuje wynik pomiaru napięcia z ADC i przelicza go na temperaturę.
  *
- * Stosujemy zmienną globalną, gdyż może być obsługiwany z pętli głównej i z przerwań.
+ * @return Temperatura w °C.
  */
-Counter counter;
+double measure()
+{
+	return 0;
+}
+
+/**
+ * Konfiguruje i uruchamia ADC.
+ */
+void adcInitialize()
+{
+}
 
 /**
  * Obsługa przerwania komparatora Timer/Counter1.
  */
-ISR(TIMER1_COMPA_vect)
+ISR(TIMER0_OVF_vect)
 {
+	display.print(measure(), 2);
 	display.refresh();
-}
-
-/**
- * Pętla główna.
- */
-void mainLoop()
-{
-	if (bit_is_clear(PIN_SWITCH, BIT_SWITCH_S1)) {
-		counter.increment();
-	}
-
-	if (bit_is_clear(PIN_SWITCH, BIT_SWITCH_S2)) {
-		counter.decrement();
-	}
-
-	if (bit_is_clear(PIN_SWITCH, BIT_SWITCH_S3)) {
-		counter.reset();
-	}
 }
 
 /**
@@ -57,10 +37,10 @@ int main()
 {
 	shifter.initialize();
 	timer.initialize();
+	adcInitialize();
 
 	sei();
 
 	while (true) {
-		mainLoop();
 	}
 }
