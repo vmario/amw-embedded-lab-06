@@ -22,7 +22,7 @@ void adcInitialize()
 }
 
 /**
- * Obsługa przerwania komparatora Timer/Counter1.
+ * Obsługa przerwania komparatora Timer/Counter0.
  */
 ISR(TIMER0_OVF_vect)
 {
