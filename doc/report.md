@@ -50,6 +50,8 @@ Wyznacz wzór na zmierzoną temperaturę w zależności od napięcia wyjścioweg
 
 \awesomebox[violet]{2pt}{\faBook}{violet}{Szczegóły odnośnie działania termometru najłatwiej odczytać ze schematu \textit{Basic Centigrade Temperature Sensor} w dokumentacji LM35DZ.}
 
+\vspace{2.5cm}
+
 ## Zadanie rozszerzone
 
 Jaką rozdzielczość pomiarową w V uzyskujemy przy napięciu referencyjnym 1,1&nbsp;V i 10-bitowej rozdzielczości ADC?
